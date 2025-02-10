@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_BOOKS 100
+
+struct Book {
+    int id;
+    char title[100];
+    char author[100];
+};
+
+struct Book library[MAX_BOOKS];
+int count = 0;
+
+void addBook() {
+    if (count < MAX_BOOKS) {
+        printf("Enter book ID: ");
+        scanf("%d", &library[count].id);
+        printf("Enter book title: ");
+        scanf(" %[^\n]s", library[count].title);
+        printf("Enter author: ");
+        scanf(" %[^\n]s", library[count].author);
+        count++;
+    } else {
+        printf("Library is full!\n");
+    }
+}
+
+void displayBooks() {
+    printf("\nLibrary Books:\n");
+    for (int i = 0; i < count; i++) {
+        printf("ID: %d | Title: %s | Author: %s\n", library[i].id, library[i].title, library[i].author);
+    }
+}
+
+int main() {
+    int choice;
+    do {
+        printf("\n1. Add Book\n2. Display Books\n3. Exit\nEnter choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1: addBook(); break;
+            case 2: displayBooks(); break;
+            case 3: printf("Exiting...\n"); break;
+            default: printf("Invalid choice!\n");
+        }
+    } while (choice != 3);
+    return 0;
+}
